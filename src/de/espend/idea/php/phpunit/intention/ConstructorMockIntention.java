@@ -102,7 +102,7 @@ public class ConstructorMockIntention extends PsiElementBaseIntentionAction {
             int length = parameters.length;
 
             int pos = 0;
-            for (Parameter parameter : ((Method) method).getParameters()) {
+            for (Parameter parameter : method.getParameters()) {
                 String className = parameter.getDeclaredType().toString();
 
                 if(pos++ < length) {
@@ -115,9 +115,12 @@ public class ConstructorMockIntention extends PsiElementBaseIntentionAction {
             PsiDocumentManager.getInstance(scope.getProject())
                 .doPostponedOperationsAndUnblockDocument(editor.getDocument());
 
+            PsiDocumentManager.getInstance(scope.getProject())
+                .commitDocument(editor.getDocument());
+
             List<String> collect = strings
                 .stream()
-                .map(s -> String.format("$this->createMock(%s::class)", s))
+                .map(s -> s == null ? "null" : String.format("$this->createMock(%s::class)", s))
                 .collect(Collectors.toList());
 
             String join = StringUtils.join(collect, ", ");
