@@ -38,6 +38,9 @@ namespace
         }
     }
 
+    /**
+     * @method PHPUnit_Framework_MockObject_Builder_InvocationMocker method($constraint)
+     */
     class PHPUnit_Framework_MockObject_MockObject
     {
         /**
@@ -53,6 +56,9 @@ namespace
     {
     }
 
+    /**
+     * @method PHPUnit_Framework_MockObject_Builder_InvocationMocker method($constraint)
+     */
     class PHPUnit_Framework_MockObject_Builder_InvocationMocker
     {
     }
@@ -84,7 +90,7 @@ namespace Foo
 {
     class Bar
     {
-       public function getFooBar()
+       public function getFooBar(): Bar
        {
        }
     }
